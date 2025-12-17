@@ -10,13 +10,21 @@ function theme() {
         body.classList.remove("dark");
     }
 }
-theme();
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){
+if(localStorage.getItem('theme')){
+    body.classList.add(localStorage.getItem('theme'));
+}else{
     theme();
+}
+
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){
+    if(!localStorage.getItem('theme')){
+        theme();
+    }
 });
 
 
-body.classList.add(localStorage.getItem('theme'));
+
 
 btn.addEventListener("click", function(){
     if(body.classList.contains('dark')){
